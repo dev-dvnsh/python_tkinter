@@ -1,10 +1,8 @@
 import sqlite3
 
-# Connect to database (creates file if not exists)
 conn = sqlite3.connect("office.db")
 cursor = conn.cursor()
 
-# Create table (only once)
 cursor.execute(
     """
 CREATE TABLE IF NOT EXISTS employees (
@@ -22,7 +20,6 @@ conn.commit()
 conn.close()
 
 
-# Reconnect to insert data
 conn = sqlite3.connect("office.db")
 cursor = conn.cursor()
 
@@ -33,7 +30,6 @@ employees_data = [
     ("Neha Singh", 30, "HR Executive", 45000),
 ]
 
-# Insert multiple employee records
 cursor.executemany(
     "INSERT INTO employees (name, age, role, salary) VALUES (?, ?, ?, ?)",
     employees_data,
@@ -44,16 +40,13 @@ print("Employee records inserted successfully!")
 conn.close()
 
 
-# Reconnect to query data
 conn = sqlite3.connect("office.db")
 cursor = conn.cursor()
 
-# Get employees with salary > 50000
 cursor.execute("SELECT * FROM employees WHERE salary > 50000")
 print("Employees earning above 50000:")
 print(cursor.fetchall())
 
-# Get employees with specific role
 cursor.execute("SELECT * FROM employees WHERE role = 'HR Executive'")
 print("\nEmployees with role 'HR Executive':")
 print(cursor.fetchall())
