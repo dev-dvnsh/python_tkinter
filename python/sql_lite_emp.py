@@ -51,4 +51,5 @@ cursor.execute("SELECT * FROM employees WHERE role = 'HR Executive'")
 print("\nEmployees with role 'HR Executive':")
 print(cursor.fetchall())
 
+
 conn.close()
